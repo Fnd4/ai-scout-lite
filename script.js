@@ -152,8 +152,10 @@ function removeDemoNotice() {
 
 // ── RENDER ───────────────────────────────
 function renderResult(data) {
-  const now = new Date();
-  const ts  = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+  const now      = new Date();
+  const timeStr  = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', timeZoneName: 'short' });
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const ts       = `Report generated · ${timeStr} · ${timezone}`;
   document.getElementById('cardTimestamp').textContent = ts;
 
   const badge = document.getElementById('verdictBadge');
