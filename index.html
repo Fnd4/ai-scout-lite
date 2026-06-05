@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Scout Lite</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <p class="badge">Evorozen Innovators Hackathon</p>
+      <h1>AI Scout Lite</h1>
+      <p class="subtitle">
+        Find AI tools, startup ideas, and GitHub projects actually worth your time.
+      </p>
+    </section>
+
+    <section class="card">
+      <label for="projectInput">Paste an AI tool, idea, or GitHub project description:</label>
+      <textarea id="projectInput" placeholder="Example: An AI app that summarizes YouTube videos for students..."></textarea>
+      <button id="analyzeBtn">Analyze Project</button>
+    </section>
+
+    <section id="output" class="result hidden"></section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
