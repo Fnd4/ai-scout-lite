@@ -1,4 +1,5 @@
 # AI Scout Lite
+Built for the Evorozen Innovators Hackathon.
 
 AI Scout Lite is a Gemini-powered web app that helps beginners decide whether an AI tool, startup idea, or GitHub project is actually worth their time.
 
