@@ -3,27 +3,148 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Scout Lite</title>
+  <title>AI Scout Lite — Project Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="app">
+
+  <div class="noise"></div>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-bracket">[</span>AI SCOUT<span class="logo-lite"> LITE</span><span class="logo-bracket">]</span>
+      </div>
+      <div class="header-meta">
+        <span class="blink-dot"></span>
+        <span class="status-text">SYSTEM ONLINE</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
     <section class="hero">
-      <p class="badge">Evorozen Innovators Hackathon</p>
-      <h1>AI Scout Lite</h1>
-      <p class="subtitle">
-        Find AI tools, startup ideas, and GitHub projects actually worth your time.
-      </p>
+      <div class="hero-tag">PROJECT INTELLIGENCE BRIEFING</div>
+      <h1 class="hero-title">
+        Drop your idea.<br />
+        Get the real picture.
+      </h1>
+      <p class="hero-sub">Paste any AI tool, startup pitch, or GitHub project description. Get an instant scout report — scored, dissected, verdict delivered.</p>
     </section>
 
-    <section class="card">
-      <label for="projectInput">Paste an AI tool, idea, or GitHub project description:</label>
-      <textarea id="projectInput" placeholder="Example: An AI app that summarizes YouTube videos for students..."></textarea>
-      <button id="analyzeBtn">Analyze Project</button>
+    <section class="input-section">
+      <div class="input-wrapper">
+        <div class="input-label">
+          <span class="label-num">01</span>
+          <span class="label-text">PASTE PROJECT DESCRIPTION</span>
+        </div>
+        <textarea
+          id="projectInput"
+          placeholder="e.g. A Chrome extension that uses GPT-4 to summarize any webpage into bullet points. Built in React, deployed to Chrome Web Store. Targets knowledge workers who spend too much time reading..."
+          rows="7"
+        ></textarea>
+        <div class="char-count" id="charCount">0 characters</div>
+      </div>
+
+      <button id="analyzeBtn" class="analyze-btn">
+        <span class="btn-label">ANALYZE PROJECT</span>
+        <span class="btn-arrow">→</span>
+      </button>
     </section>
 
-    <section id="output" class="result hidden"></section>
+    <section class="result-section" id="resultSection">
+      <div class="result-card" id="resultCard">
+
+        <div class="card-header">
+          <div class="card-header-left">
+            <div class="card-tag">SCOUT REPORT</div>
+            <div class="card-timestamp" id="cardTimestamp"></div>
+          </div>
+          <div class="verdict-badge" id="verdictBadge"></div>
+        </div>
+
+        <div class="score-hero">
+          <div class="score-label">SCOUT SCORE</div>
+          <div class="score-display">
+            <span class="score-number" id="scoutScore">0</span>
+            <span class="score-denom">/100</span>
+          </div>
+          <div class="score-bar-wrap">
+            <div class="score-bar" id="scoreBar"></div>
+          </div>
+        </div>
+
+        <div class="card-body">
+
+          <div class="field-group">
+            <div class="field-label">SUMMARY</div>
+            <div class="field-value" id="summary"></div>
+          </div>
+
+          <div class="field-group">
+            <div class="field-label">WHO IT HELPS</div>
+            <div class="field-value" id="whoItHelps"></div>
+          </div>
+
+          <div class="field-group">
+            <div class="field-label">WEAKNESSES</div>
+            <div class="field-value weakness" id="weaknesses"></div>
+          </div>
+
+          <div class="subscores-grid">
+            <div class="subscore-item" id="sub-usefulness">
+              <div class="subscore-bar-wrap">
+                <div class="subscore-bar"></div>
+              </div>
+              <div class="subscore-num"></div>
+              <div class="subscore-label">USEFULNESS</div>
+            </div>
+            <div class="subscore-item" id="sub-originality">
+              <div class="subscore-bar-wrap">
+                <div class="subscore-bar"></div>
+              </div>
+              <div class="subscore-num"></div>
+              <div class="subscore-label">ORIGINALITY</div>
+            </div>
+            <div class="subscore-item" id="sub-technical">
+              <div class="subscore-bar-wrap">
+                <div class="subscore-bar"></div>
+              </div>
+              <div class="subscore-num"></div>
+              <div class="subscore-label">TECH POTENTIAL</div>
+            </div>
+            <div class="subscore-item" id="sub-beginner">
+              <div class="subscore-bar-wrap">
+                <div class="subscore-bar"></div>
+              </div>
+              <div class="subscore-num"></div>
+              <div class="subscore-label">BEGINNER VALUE</div>
+            </div>
+          </div>
+
+          <div class="field-group next-step-group">
+            <div class="field-label">NEXT STEP</div>
+            <div class="field-value next-step-value" id="nextStep"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
   </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>AI SCOUT LITE</span>
+      <span class="footer-sep">·</span>
+      <span>HACKATHON MVP</span>
+      <span class="footer-sep">·</span>
+      <span>DEMO MODE</span>
+    </div>
+  </footer>
 
   <script src="script.js"></script>
 </body>
