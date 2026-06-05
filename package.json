@@ -1,0 +1,15 @@
+{
+  "name": "ai-scout-lite",
+  "version": "1.0.0",
+  "description": "AI Scout Lite helps beginners evaluate AI tools, startup ideas, and GitHub projects using Gemini AI.",
+  "type": "module",
+  "scripts": {
+    "dev": "netlify dev"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.38.1"
+  }
+}
