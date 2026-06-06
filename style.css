@@ -180,8 +180,14 @@ main {
 .input-label {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: space-between;
   margin-bottom: 0.75rem;
+}
+
+.input-label-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .label-num {
@@ -222,13 +228,37 @@ textarea:focus {
   box-shadow: 0 0 0 3px var(--amber-glow);
 }
 
+.input-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.4rem;
+}
+
 .char-count {
   font-family: var(--font-mono);
   font-size: 0.68rem;
   color: var(--text-muted);
-  text-align: right;
-  margin-top: 0.4rem;
   letter-spacing: 0.05em;
+}
+
+.load-example-btn {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--amber);
+  background: transparent;
+  border: 1px solid var(--amber-dim);
+  border-radius: 3px;
+  padding: 0.25rem 0.65rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.load-example-btn:hover {
+  color: #0f0f0f;
+  background: var(--amber);
+  border-color: var(--amber);
 }
 
 /* ── ANALYZE BUTTON ────────────────────── */
@@ -277,6 +307,16 @@ textarea:focus {
 .analyze-btn.loading {
   pointer-events: none;
   background: var(--amber-dim);
+}
+
+/* ── GEMINI BADGE ──────────────────────── */
+.gemini-badge {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
 }
 
 .btn-arrow {
@@ -528,6 +568,38 @@ textarea:focus {
   font-size: 1rem;
   color: var(--amber);
   font-weight: 500;
+}
+
+/* ── COPY ROW ──────────────────────────── */
+.copy-row {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.copy-btn {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.copy-btn:hover {
+  color: var(--amber);
+  border-color: var(--amber-dim);
+}
+
+.copy-btn.copied {
+  color: var(--green);
+  border-color: var(--green);
 }
 
 /* ── FOOTER ────────────────────────────── */
