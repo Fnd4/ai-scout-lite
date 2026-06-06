@@ -38,21 +38,27 @@
     <section class="input-section">
       <div class="input-wrapper">
         <div class="input-label">
-          <span class="label-num">01</span>
-          <span class="label-text">PASTE PROJECT DESCRIPTION</span>
+          <div class="input-label-left">
+            <span class="label-num">01</span>
+            <span class="label-text">PASTE PROJECT DESCRIPTION</span>
+          </div>
+          <button id="loadExampleBtn" class="load-example-btn">LOAD EXAMPLE</button>
         </div>
         <textarea
           id="projectInput"
           placeholder="e.g. A Chrome extension that uses GPT-4 to summarize any webpage into bullet points. Built in React, deployed to Chrome Web Store. Targets knowledge workers who spend too much time reading..."
           rows="7"
         ></textarea>
-        <div class="char-count" id="charCount">0 characters</div>
+        <div class="input-meta">
+          <div class="char-count" id="charCount">0 characters</div>
+        </div>
       </div>
 
       <button id="analyzeBtn" class="analyze-btn">
         <span class="btn-label">ANALYZE PROJECT</span>
         <span class="btn-arrow">→</span>
       </button>
+      <div class="gemini-badge">⚡ Powered by Gemini API</div>
     </section>
 
     <section class="result-section" id="resultSection">
@@ -128,6 +134,12 @@
           <div class="field-group next-step-group">
             <div class="field-label">NEXT STEP</div>
             <div class="field-value next-step-value" id="nextStep"></div>
+          </div>
+
+          <div class="copy-row">
+            <button id="copyBtn" class="copy-btn">
+              <span class="copy-btn-label">COPY REPORT</span>
+            </button>
           </div>
 
         </div>
