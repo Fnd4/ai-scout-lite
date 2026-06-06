@@ -46,10 +46,12 @@ const DEMO_RESULTS = [
 let demoIndex = 0;
 
 // ── DOM REFS ─────────────────────────────
-const input      = document.getElementById('projectInput');
-const charCount  = document.getElementById('charCount');
-const analyzeBtn = document.getElementById('analyzeBtn');
-const resultSec  = document.getElementById('resultSection');
+const input          = document.getElementById('projectInput');
+const charCount      = document.getElementById('charCount');
+const analyzeBtn     = document.getElementById('analyzeBtn');
+const resultSec      = document.getElementById('resultSection');
+const loadExampleBtn = document.getElementById('loadExampleBtn');
+const copyBtn        = document.getElementById('copyBtn');
 
 // ── CHAR COUNTER ─────────────────────────
 input.addEventListener('input', () => {
@@ -57,11 +59,69 @@ input.addEventListener('input', () => {
   charCount.textContent = `${len.toLocaleString()} character${len !== 1 ? 's' : ''}`;
 });
 
+// ── LOAD EXAMPLE ─────────────────────────
+const EXAMPLE_TEXT = `AI Scout Lite is a Gemini-powered web app for students, beginner developers, and hackathon builders who are overwhelmed by AI tools, startup ideas, and GitHub projects.
+
+Users paste a project description or README-style text, and the app generates a structured scout report with a summary, target users, weaknesses, usefulness score, originality score, technical potential score, beginner value score, a total Scout Score from 0 to 100, and a TRY/WATCH/SKIP verdict.
+
+Unlike a basic summarizer, AI Scout Lite is focused on decision-making. It helps beginners decide whether a project is actually worth their time, what risks or hype signals to watch for, what they can learn from it, and what the best next step should be.
+
+The MVP uses plain HTML, CSS, JavaScript, Netlify Functions, and Gemini API. Future versions could support direct GitHub README analysis, repository activity checks, saved reports, project comparisons, browser extension support, and daily curated AI project recommendations.`;
+
+loadExampleBtn.addEventListener('click', () => {
+  input.value = EXAMPLE_TEXT;
+  charCount.textContent = `${EXAMPLE_TEXT.length.toLocaleString()} characters`;
+  input.focus();
+});
+
+// ── COPY REPORT ───────────────────────────
+// Populated by renderResult() so copyBtn can access the latest data
+let lastResult = null;
+
+copyBtn.addEventListener('click', () => {
+  if (!lastResult) return;
+
+  const r = lastResult;
+  const text = [
+    `AI SCOUT LITE — SCOUT REPORT`,
+    `════════════════════════════`,
+    `Scout Score: ${r.scoutScore}/100`,
+    `Verdict:     ${r.verdict}`,
+    ``,
+    `SUMMARY`,
+    r.summary,
+    ``,
+    `WHO IT HELPS`,
+    r.whoItHelps,
+    ``,
+    `WEAKNESSES`,
+    r.weaknesses,
+    ``,
+    `SCORES`,
+    `Usefulness:       ${r.scores.usefulness}/25`,
+    `Originality:      ${r.scores.originality}/25`,
+    `Tech Potential:   ${r.scores.technical}/25`,
+    `Beginner Value:   ${r.scores.beginner}/25`,
+    ``,
+    `NEXT STEP`,
+    r.nextStep,
+  ].join('\n');
+
+  navigator.clipboard.writeText(text).then(() => {
+    copyBtn.classList.add('copied');
+    copyBtn.querySelector('.copy-btn-label').textContent = 'COPIED ✓';
+    setTimeout(() => {
+      copyBtn.classList.remove('copied');
+      copyBtn.querySelector('.copy-btn-label').textContent = 'COPY REPORT';
+    }, 2000);
+  });
+});
+
 // ── MAIN BUTTON HANDLER ──────────────────
 analyzeBtn.addEventListener('click', async () => {
   const text = input.value.trim();
 
-  if (text.length < 20) {
+  if (text.length < 30) {
     shakeInput();
     return;
   }
@@ -129,7 +189,7 @@ function showDemoNotice() {
 
   const notice = document.createElement('div');
   notice.id = 'demoNotice';
-  notice.textContent = 'Demo mode — API unavailable, showing sample data.';
+  notice.textContent = 'Live Gemini request failed. Showing fallback demo report.';
   notice.style.cssText = `
     font-family: var(--font-mono);
     font-size: 0.68rem;
@@ -152,6 +212,8 @@ function removeDemoNotice() {
 
 // ── RENDER ───────────────────────────────
 function renderResult(data) {
+  lastResult = data;
+
   const now      = new Date();
   const timeStr  = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', timeZoneName: 'short' });
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -235,7 +297,7 @@ function shakeInput() {
   wrapper.style.animation = 'shake 0.4s ease';
   setTimeout(() => wrapper.style.animation = '', 400);
   input.focus();
-  charCount.textContent = 'Need at least 20 characters';
+  charCount.textContent = 'Add more detail. A strong scout report needs at least a short project description, target user, and problem.';
 }
 
 const shakeStyle = document.createElement('style');
